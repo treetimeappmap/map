@@ -104,8 +104,8 @@ border-radius: 30px;
     width: 100%;
 }
 .marker {
-    background-image: url('https://treetimeapp.com/wp-content/uploads/2021/08/forest_natives.png');
-    background-size: cover;
+    background-image: url('images/logo.png');
+    background-size: contain;
     width: 3em;
     height: 3em;
     border-radius: 50%;
@@ -138,6 +138,13 @@ a.mapboxgl-ctrl-logo,
 .mapboxgl-ctrl-bottom-right {
     display: none !important;
 }
+
+.popup-img {
+  width: 100%;
+  border-radius: 8px;
+  margin: 8px 0 12px;
+  object-fit: cover;
+}
   
 @media screen and (max-width: 650px){
   .topnav,
@@ -153,7 +160,7 @@ a.mapboxgl-ctrl-logo,
 <body>
       
 <div class="topnav">
-  <img src="https://treetimeapp.com/wp-content/uploads/2020/09/logownpf-e1599634124630.png" alt="Trulli" width="100" height="30">
+  <img src="images/treetimelogo.png" alt="Trulli" width="100" height="30">
   <div class="topnav-right"><p>Site Capacity:<span> 4,000</span></p></div>
   <div class="topnav-right"><p>Trees Donated:<span> 2,203</span></p></div>
 </div>
@@ -162,7 +169,7 @@ a.mapboxgl-ctrl-logo,
             <h1>Plant Now</h1>
         </div>
     </a>
-    <div class="btn-title-container">  <img src="https://treetimeapp.com/wp-content/uploads/2020/09/logownpf-e1599634124630.png" alt="Trulli" width="100" height="30">
+    <div class="btn-title-container">  <img src="/images/treetimelogo.png" alt="Trulli" width="100" height="30">
     </div>
 
 <div id="map"></div>
@@ -172,22 +179,39 @@ a.mapboxgl-ctrl-logo,
 <script>
 mapboxgl.accessToken = 'pk.eyJ1IjoidHJlZXRpbWUiLCJhIjoiY2w3NnR1ZXluMGJhbzNucDNycjRiM3cwMiJ9.7crLm7gnNpgGTKKr7owi1g';
  
-      const geojson = {
-        'type': 'FeatureCollection',
-        'features': [
-          {
-            'type': 'Feature',
-            'geometry': {
-              'type': 'Point',
-              'coordinates': [167.672694, -45.683417]
-            },
-            'properties': {
-              'title': 'Southland Site',
-              'description': 'New Zealand'
-            }
-          }
-        ]
-      };
+const geojson = {
+  type: 'FeatureCollection',
+  features: [
+    {
+      type: 'Feature',
+      geometry: {
+        type: 'Point',
+        coordinates: [167.672694, -45.683417]
+      },
+      properties: {
+        title: 'Southland Site',
+description: `
+  <div class="popup-wrapper">
+
+    <img src="images/trees.jpg" 
+         alt="Southland Site" 
+         class="popup-img">
+
+    <p>
+1,000 Attenuata hybrids were planted at our Southland Site this month, with guards and repellent added for protection.
+    </p>
+
+    <div class="popup-meta">Southland, New Zealand</div>
+  </div>
+`
+      }
+    }
+  ]
+};
+
+
+
+      
  
 const map = new mapboxgl.Map({
 container: 'map',
